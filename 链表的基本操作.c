@@ -93,7 +93,7 @@ List Insert( List L, ElementType X, Position P )//对头指针的优化   注意
         }
         L=L->Next;
     }
-    printf("Wrong Position for Insertion");
+    printf("Wrong Position for Insertion\n");
     return ERROR;  
 }//Insert函数正确 
 
