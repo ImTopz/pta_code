@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef int ElementType;
+typedef struct Node *PtrToNode;
+struct Node {
+    ElementType Data;
+    PtrToNode   Next;
+};
+typedef PtrToNode List;
+
+List Read(); /* 细节在此不表 */
+void Print( List L ); /* 细节在此不表 */
+
+List Insert( List L, ElementType X );
+
+int main()
+{
+    List L;
+    ElementType X;
+    L = Read();
+    scanf("%d", &X);
+    L = Insert(L, X);
+    Print(L);
+    return 0;
+}
+
+/* 你的代码将被嵌在这里 */
+List Insert(List L,ElementType X)
+{
+   List a;
+   a=(List)malloc(sizeof(List));
+   a->Next=NULL;
+   a->Data=X;
+   List head=L;
+   List q=L;
+   if(L->Data>=X)
+   {
+       a->Next=L;
+       return a;
+   }
+   while(L->Next)
+   {
+   	   q=L;
+       if(L->Next->Data>=X)
+       {
+          a->Next=L->Next;
+          L->Next=a;
+          return head;
+       }
+       L=L->Next;
+   }
+   if(L->Data<=X)
+   {
+   	L->Next=a;
+   	a->Next=NULL;
+   	return head;
+   }
+   else
+   {
+   	q->Next=a;
+   	a->Next=L;
+   	L->Next=NULL;
+   	return head;
+   }
+  
+}
