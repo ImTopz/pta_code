@@ -1,0 +1,97 @@
+#include <iostream>
+using namespace std;
+typedef struct LNode{
+        struct LNode *next;
+        int data;
+}LNode,*LinkList;
+void Add(LinkList A,LinkList B,LinkList &C)
+{
+   LinkList a=A->next;
+   LinkList b=B->next;
+   LinkList c=C;
+   while(a&&b)
+   {
+   	if(a->data<b->data)
+   	{
+   		c->next=a;
+   		c=c->next;
+   		a=a->next;
+	   }
+	else
+	{
+	   c->next=b;
+	   b=b->next;
+	   c=c->next;
+	}
+   }
+   if(a)
+   {
+   	c->next=a;
+   }
+   if(b)
+   {
+   	c->next=b;
+   }
+}
+void Print(LinkList L)
+{
+    if(L->next==NULL)
+    {
+        cout<<"NULL";
+    }
+    else
+    {
+    	int flag=0;
+        while(L->next)
+        {
+        	
+            if(flag==0)
+            {
+                cout<<L->next->data;
+                flag++;
+                L=L->next;
+            }
+            else{
+            cout<<" "<<L->next->data;
+            L=L->next;
+        }
+            
+        }
+    }
+}
+int main()
+{
+    LinkList p=new LNode;
+    LinkList q=new LNode;
+    p->next=NULL;
+    q->next=NULL;//初始指针不要动了 防止信息丢失
+    LinkList x=p;//指向头节点
+    LinkList y=q;
+    int n;
+    while(true)
+    {
+    	LinkList a=new LNode;//每次创造一个新的结点
+    	a->next=NULL;
+        scanf("%d",&n);
+        if(n==-1)
+            break;
+        a->data=n;
+        x->next=a;
+        x=x->next;
+    }
+    while(true)
+    {
+       	LinkList a=new LNode;
+    	a->next=NULL;
+        scanf("%d",&n);
+        if(n==-1)
+            break;
+        a->data=n;
+        y->next=a;
+        y=y->next;
+    }
+    LinkList C=new LNode;
+    C->next=NULL;
+    Add(p,q,C);
+    Print(C);
+}
