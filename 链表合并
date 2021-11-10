@@ -1,0 +1,92 @@
+#include <iostream>
+using namespace std;
+typedef struct LNode{
+        struct LNode *next;
+        int data;
+}LNode,*LinkList;
+void Add(LinkList &A,LinkList &B,LinkList &C)
+{
+     A=A->next;
+     B=B->next;
+     LinkList c=C;
+	 while(A&&B)
+	 	{
+	 		if(A->data==B->data)
+	 		{
+	 			c->next=A;
+	 			A=A->next;
+	 			B=B->next;
+	 			c=c->next;
+			 }
+			 else if(A->data<B->data)
+			 {
+			 	A=A->next;
+			 }
+			 else
+			 {
+			 	B=B->next;
+			 }
+		 }
+}
+void Print(LinkList L)
+{
+    if(L->next==NULL)
+    {
+        cout<<"NULL";
+    }
+    else
+    {
+    	int flag=0;
+        while(L->next)
+        {
+        	
+            if(flag==0)
+            {
+                cout<<L->next->data;
+                flag++;
+                L=L->next;
+            }
+            else{
+            cout<<" "<<L->next->data;
+            L=L->next;
+        }
+            
+        }
+    }
+}
+int main()
+{
+    LinkList p=new LNode;
+    LinkList q=new LNode;
+    p->next=NULL;
+    q->next=NULL;
+    LinkList x=p;
+    LinkList y=q;
+    int n;
+    while(true)
+    {
+    	LinkList a=new LNode;
+    	a->next=NULL;
+        scanf("%d",&n);
+        if(n==-1)
+            break;
+        a->data=n;
+        x->next=a;
+        x=x->next;
+    }
+    while(true)
+    {
+       	LinkList a=new LNode;
+    	a->next=NULL;
+        scanf("%d",&n);
+        if(n==-1)
+            break;
+        a->data=n;
+        y->next=a;
+        y=y->next;
+    }
+    LinkList C=new LNode;
+    C->next=NULL;
+    Add(p,q,C);
+    Print(C);
+}
